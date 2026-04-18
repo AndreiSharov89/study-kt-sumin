@@ -1,4 +1,4 @@
-package _2_OOP
+package _2_OOP.profile
 
 fun main() {
     print("Input 1st name: ")

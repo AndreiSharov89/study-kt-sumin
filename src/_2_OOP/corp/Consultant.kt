@@ -1,11 +1,11 @@
-package _2_OOP
+package _2_OOP.corp
 
 import kotlin.random.Random
 
 class Consultant(
-    val name: String,
-    val age: Int = 0
-) {
+    name: String,
+    age: Int = 0
+) : Worker(name, age) {
     fun sayHello() {
         println("Hi, my name is $name.")
         if (age > 0) {
@@ -15,12 +15,15 @@ class Consultant(
         }
     }
 
-    fun work(): Int {
+    fun consult(): Int {
         val clients: Int = Random.nextInt(100)
         repeat(clients) {
             print("Consulting client.. ")
         }
         println()
         return clients
+    }
+    override fun work() {
+        println("Consulting..")
     }
 }

@@ -1,15 +1,19 @@
-package _2_OOP
+package _2_OOP.corp
 
 class Director(
-    val name: String,
-    val age: Int
-) {
-    fun askCoffe(assistant: Assistant) {
+    name: String,
+    age: Int
+) : Worker(name, age) {
+    fun askCoffee(assistant: Assistant) {
         val drinkName: String = assistant.bringCoffe()
         println("Thank you, ${assistant.name}. $drinkName looks great.")
     }
     fun makeConsultantWork(consultant: Consultant) {
-        val amount: Int = consultant.work()
+        val amount: Int = consultant.consult()
         println("Consultant ${consultant.name} served $amount clients.")
+    }
+
+    override fun work() {
+        println("Drinking coffee..")
     }
 }

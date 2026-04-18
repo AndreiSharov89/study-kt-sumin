@@ -1,4 +1,4 @@
-package _2_OOP
+package _2_OOP.gui
 
 class Rectangle(
     val width: Int = 0,

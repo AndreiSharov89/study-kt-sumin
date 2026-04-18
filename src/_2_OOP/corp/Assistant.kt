@@ -1,6 +1,6 @@
-package _2_OOP
+package _2_OOP.corp
 
-class Assistant(val name: String) {
+class Assistant(name: String) : Worker(name) {
 
     fun bringCoffe(count: Int = 1, drink: String = "Cappuccino"): String {
         println("Get up.")
@@ -14,5 +14,9 @@ class Assistant(val name: String) {
         }
         println("Reeturn to the workplace.")
         return drink
+    }
+
+    override fun work() {
+        println("Making coffee..")
     }
 }
