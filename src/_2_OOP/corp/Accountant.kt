@@ -1,20 +1,42 @@
 package _2_OOP.corp
 
 class Accountant(name: String) : Worker(name) {
+    val items = mutableListOf<ProductCard>()
     override fun work() {
         while (true) {
-            println("Enter the operation code: 0 - exit, 1 - register item: ")
+            val operationTypes = OperationType.entries
+            print("Enter the operation code: ")
+            for ((index, operation) in operationTypes.withIndex()) {
+                print("$index - ${operation.title}")
+                if (index < operationTypes.size - 1) {
+                    print(", ")
+                } else {
+                    print((": "))
+                }
+            }
             val code = readln().toInt()
-            when (code) {
-                0 -> break
-                1 -> registerItem()
+            val operationType = operationTypes[code]
+            when (operationType) {
+                OperationType.EXIT -> break
+                OperationType.REGISTER_NEW_ITEM -> registerItem()
+                OperationType.SHOW_ITEMS -> showProducts()
             }
         }
     }
 
     fun registerItem() {
-        print("Enter product type. 0 - Food, 1 - Appliance, 2 - Shoes: ")
-        val productType = readln().toInt()
+        val productTypes = ProductType.entries
+        print("Enter product type. ")
+        for ((index, type) in productTypes.withIndex()) {
+            print("$index - ${type.title}")
+            if (index < productTypes.size - 1) {
+                print(", ")
+            } else {
+                print((": "))
+            }
+        }
+        val productTypeIndex = readln().toInt()
+        val productType = productTypes[productTypeIndex]
         print("Enter product name: ")
         val name = readln()
         print("Enter product brand: ")
@@ -22,24 +44,32 @@ class Accountant(name: String) : Worker(name) {
         print("Enter product price: ")
         val price = readln().toInt()
         val product = when (productType) {
-            0 -> {
+            ProductType.FOOD -> {
                 print("Enter calories: ")
                 val caloric = readln().toInt()
                 FoodCard(name, brand, price, caloric)
             }
 
-            1 -> {
+            ProductType.APPLIANCE -> {
                 print("Enter wattage: ")
                 val wattage = readln().toInt()
                 ApplianceCard(name, brand, price, wattage)
             }
 
-            else -> {
+            ProductType.SHOES -> {
                 print("Enter size: ")
                 val size = readln().toFloat()
                 ShoesCard(name, brand, price, size)
             }
         }
+        items.add(product)
         product.printInfo()
+    }
+
+    fun showProducts() {
+        for ((index, product) in items.withIndex()) {
+            print("$index - ")
+            product.printInfo()
+        }
     }
 }
